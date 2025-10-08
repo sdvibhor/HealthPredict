@@ -1,0 +1,36 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthPredict</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="nav">
+    <a href="{{ url_for('home') }}" class="brand">HealthPredict</a>
+    <a href="{{ url_for('home') }}">Home</a>    
+    <a href="{{ url_for('diseases') }}">Diseases</a>
+    <a href="{{ url_for('bodymap') }}">Body Map</a>
+    <a href="{{ url_for('bmi') }}">BMI</a>
+    <a href="{{ url_for('chatbot') }}">AI Assistant</a>
+    <a href="{{ url_for('encyclopedia') }}">Encyclopedia</a>
+  <a href="{{ url_for('history') }}">History</a>
+    <a href="{{ url_for('firstaid') }}">First Aid</a>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('about') }}">About</a>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 HealthPredict · Educational demo — not medical advice</p>
+  </footer>
+
+  <!-- ✅ Move JS here -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

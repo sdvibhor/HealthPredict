@@ -1,0 +1,124 @@
+
+*{box-sizing:border-box}
+body{font-family:system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;line-height:1.5;margin:0;background:#0b1020;color:#e9eef9}
+.nav{display:flex;gap:18px;align-items:center;padding:12px 18px;border-bottom:1px solid #23315f;background:#0f1630;position:sticky;top:0}
+.nav a{color:#cfe0ff;text-decoration:none}
+.nav .brand{font-weight:800;color:#ffffff}
+.hero{min-height:60vh;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center}
+.hero-inner{background:rgba(0,0,0,.45);padding:24px 28px;border-radius:16px;text-align:center}
+.hero h1{margin:0 0 10px 0;font-size:38px;color:#fff}
+.hero p{color:#e7ecff}
+.btn{display:inline-block;background:#3a62ff;color:#fff;padding:10px 16px;border-radius:12px;border:1px solid #3657d9;text-decoration:none}
+.content{max-width:980px;margin:24px auto;padding:0 16px}
+.center{text-align:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:14px}
+.card{background:#0f1630;border:1px solid #223060;border-radius:14px;padding:14px}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:8px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:8px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.badge{display:inline-block;padding:8px 12px;border-radius:10px;font-weight:700}
+.badge.ok{background:#0a3; color:#fff}
+.badge.moderate{background:#e6a700; color:#111}
+.badge.high{background:#c00; color:#fff}
+.results{padding-left:18px}
+.footer{max-width:980px;margin:20px auto;padding:8px 16px;color:#93a3c7}
+.tips{margin-top:18px}
+.muted{opacity:.85}
+.split{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:center;max-width:980px;margin:18px auto;padding:0 16px}
+.split img{width:100%;border-radius:14px;border:1px solid #223060}
+.hero {
+  position: relative;
+  min-height: 70vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);  /* Dark overlay across full hero */
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;  /* Make sure text is above overlay */
+  max-width: 800px;
+  padding: 40px;
+}
+.cards .card {
+  background: #182447;   /* darker background than diseases */
+  transition: transform 0.2s;
+}
+.cards .card:hover {
+  transform: translateY(-5px);
+}
+.chart-container {
+  text-align: center;
+  margin: 20px 0;
+}
+.chart-container img {
+  max-width: 600px;
+  display: block;
+  margin: 0 auto;
+}
+/* Hero */
+.hero { 
+  position: relative; min-height: 80vh; 
+  background-size: cover; background-position: center; 
+  display: flex; align-items: center; justify-content: center; 
+  text-align: center; color: white;
+}
+.hero::before { 
+  content:""; position:absolute; top:0; left:0; right:0; bottom:0; 
+  background:rgba(0,0,0,0.55); z-index:1; 
+}
+.hero-inner { position:relative; z-index:2; max-width:800px; padding:30px; }
+.hero .highlight { color:#3a62ff; }
+.btn.big { padding:14px 28px; font-size:18px; }
+
+/* Features */
+.features { padding:60px 20px; background:#0f1630; color:#fff; }
+.feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:30px; }
+.feature-card { background:#182447; padding:20px; border-radius:12px; text-align:center; }
+.feature-card img { width:70px; margin-bottom:15px; }
+
+/* Timeline */
+.how-it-works { padding:60px 20px; }
+.timeline { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:30px; }
+.step { text-align:center; max-width:200px; }
+.circle { display:inline-block; width:50px; height:50px; line-height:50px; border-radius:50%; background:#3a62ff; color:#fff; font-weight:bold; }
+
+/* CTA */
+.cta { padding:60px 20px; background:#3a62ff; text-align:center; color:white; }
+.cta .btn.big { background:white; color:#3a62ff; font-weight:bold; }
+
+/* Animations */
+.fade-in { opacity:0; transform:translateY(20px); transition:all 0.8s ease; }
+.fade-in.show { opacity:1; transform:translateY(0); }
+
+#trend-graph {
+  width: 100%;
+  height: 500px;
+  margin-top: 20px;
+}
+.dashboard-graph {
+  width: 100%;        /* forces full container width */
+  height: auto;       /* maintains aspect ratio */
+  display: block;
+  margin: 0 auto;
+}
+
+
+
+
+
