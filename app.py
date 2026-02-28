@@ -1,26 +1,57 @@
-from flask import Flask, render_template, request, session, jsonify
+from flask import Flask, render_template, request,redirect,url_for, session, jsonify
 import numpy as np
 import pandas as pd
 import joblib, json, os
 from pathlib import Path
+
 
 # --- NEW IMPORTS for graph ---
 import matplotlib
 matplotlib.use('Agg')   # Non-GUI backend for Flask
 import matplotlib.pyplot as plt
 import io, base64
+from datetime import datetime
+import sqlite3
 
 # --- Gemini API (Chatbot) ---
 import google.generativeai as genai
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-gemini_model = genai.GenerativeModel("gemini-1.5-flash")
+
+gemini_model = genai.GenerativeModel("gemini-2.5-flash")
+
+
 
 def query_gemini(prompt):
     try:
         response = gemini_model.generate_content(
-            f"You are a helpful medical assistant. User says: {prompt}. "
-            f"Suggest possible conditions, precautions, lifestyle changes, but remind them it’s not medical advice."
-        )
+    f"""
+You are a helpful medical assistant.
+
+User symptoms: {prompt}
+
+Respond strictly in this format:
+
+Possible Conditions:
+- point 1
+- point 2
+
+Precautions:
+- point 1
+- point 2
+
+Lifestyle Recommendations:
+- point 1
+- point 2
+
+When to See a Doctor:
+- point 1
+
+Disclaimer:
+This is not medical advice. Consult a qualified doctor.
+
+Do not use special characters. Keep it clean and structured.
+"""
+)
         return response.text
     except Exception as e:
         return f"⚠️ Error connecting to Gemini: {str(e)}"
@@ -28,6 +59,58 @@ def query_gemini(prompt):
 
 app = Flask(__name__)
 app.secret_key = "secret123"
+
+
+DB_PATH = "medications.db"
+
+# --- Create DB automatically if missing ---
+def init_db():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS medications (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                dosage TEXT NOT NULL,
+                time TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+init_db()
+
+# --- Medication Tracker Routes ---
+@app.route("/medications", methods=["GET", "POST"])
+def medications():
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        dosage = request.form.get("dosage", "").strip()
+        time = request.form.get("time", "").strip()
+        if name and dosage and time:
+            cursor.execute(
+                "INSERT INTO medications (name, dosage, time) VALUES (?, ?, ?)",
+                (name, dosage, time)
+            )
+            conn.commit()
+
+    # Fetch only date (not time)
+    cursor.execute("""
+        SELECT id, name, dosage, time, DATE(created_at) as date_only
+        FROM medications ORDER BY created_at DESC
+    """)
+    meds = cursor.fetchall()
+    conn.close()
+
+    return render_template("medications.html", meds=meds)
+
+@app.route("/delete_med/<int:mid>")
+def delete_med(mid):
+    conn = sqlite3.connect(DB_PATH)
+    conn.execute("DELETE FROM medications WHERE id=?", (mid,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("medications"))
 
 MODEL_DIR = Path("model")
 
@@ -74,6 +157,17 @@ def plot_probs(labels, probs):
     plt.close(fig)
     return encoded
 
+# --- PWA Routes ---
+@app.route('/manifest.json')
+def serve_manifest():
+    return app.send_static_file('manifest.json')
+
+@app.route('/sw.js')
+def serve_sw():
+    response = app.send_static_file('sw.js')
+    response.headers['Content-Type'] = 'application/javascript'
+    return response
+
 # --- ROUTES ---
 @app.route("/")
 def home():
@@ -91,6 +185,10 @@ def chatbot():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/hospitals")
+def hospitals():
+    return render_template("hospitals.html")
 
 @app.route("/diseases")
 def diseases():

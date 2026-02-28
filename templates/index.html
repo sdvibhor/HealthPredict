@@ -2,13 +2,23 @@
 {% block content %}
 
 <!-- Hero Section -->
+<!-- Hero Section -->
 <section class="hero" style="background-image:url('{{ url_for('static', filename='images/landing.jpg') }}');">
-  <div class="hero-inner">
+
+  <!-- 🫧 Floating bubbles -->
+  <div class="hero-bubble"></div>
+  <div class="hero-bubble"></div>
+  <div class="hero-bubble"></div>
+  <div class="hero-bubble"></div>
+  <div class="hero-bubble"></div>
+
+  <div class="hero-inner fade-in">
     <h1>Welcome to <span class="highlight">HealthPredict</span></h1>
     <p>Your AI-powered companion for smarter health insights.</p>
     <a class="btn big" href="{{ url_for('diseases') }}">Start Checking</a>
   </div>
 </section>
+
 
 <!-- Features Section -->
 <section class="features">
