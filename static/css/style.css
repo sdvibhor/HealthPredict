@@ -103,6 +103,7 @@ body {
   margin-bottom: 12px;
   background: linear-gradient(90deg, #fff, var(--primary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -554,6 +555,7 @@ body {
   margin-bottom: 8px;
   background: linear-gradient(90deg, #fff, var(--primary));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -820,4 +822,102 @@ body {
   background: var(--card-bg);
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === MOBILE RESPONSIVENESS (PWA) === */
+@media (max-width: 768px) {
+
+  /* Navbar */
+  .nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 12px 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+  }
+
+  /* Hero Section */
+  .hero-inner {
+    padding: 25px 15px;
+    margin: 0 15px;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  /* Feature Grid & Bubbles */
+  .cards,
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .feature-card img {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* Timeline */
+  .timeline {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .step {
+    max-width: 100%;
+  }
+
+  /* Mental Health Container */
+  .mh-container {
+    margin: 20px 10px;
+    padding: 15px;
+  }
+
+  .mh-card {
+    padding: 15px;
+  }
+
+  /* Chatbot */
+  .chat-box {
+    height: 350px !important;
+  }
+
+  /* Hospitals / Forms */
+  .hospital-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control-group {
+    justify-content: space-between;
+  }
+
+  .hospital-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* General Paddings */
+  .features,
+  .how-it-works,
+  .cta {
+    padding: 50px 15px;
+  }
+
+  .hospital-finder,
+  .content {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }

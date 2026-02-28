@@ -4,10 +4,10 @@
   <h2>Heart Disease Checker</h2>
   <form method="POST">
     <div class="grid2">
-      <label>Age<input type="number" name="age" required></label>
-      <label>Blood Pressure (mmHg)<input type="number" name="bp" required></label>
-      <label>Cholesterol (mg/dL)<input type="number" name="cholesterol"></label>
-      <label>Max Heart Rate<input type="number" name="max_heart_rate"></label>
+      <label>Age<input type="number" inputmode="numeric" pattern="[0-9]*" name="age" required></label>
+      <label>Blood Pressure (mmHg)<input type="number" inputmode="decimal" step="any" name="bp" required></label>
+      <label>Cholesterol (mg/dL)<input type="number" inputmode="decimal" step="any" name="cholesterol"></label>
+      <label>Max Heart Rate<input type="number" inputmode="numeric" pattern="[0-9]*" name="max_heart_rate"></label>
     </div>
     <fieldset>
       <legend>Symptoms</legend>

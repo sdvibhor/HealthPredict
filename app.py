@@ -182,6 +182,10 @@ def chatbot():
         return jsonify({"reply": reply})
     return render_template("chatbot.html")
 
+@app.route("/mental_health")
+def mental_health():
+    return render_template("mental_health.html")
+
 @app.route("/about")
 def about():
     return render_template("about.html")

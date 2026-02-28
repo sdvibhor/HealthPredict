@@ -4,11 +4,11 @@
   <h2>Diabetes Checker</h2>
   <form method="POST">
     <div class="grid2">
-      <label>Age<input type="number" name="age" required></label>
-      <label>Glucose (mg/dL)<input type="number" name="glucose" required></label>
-      <label>Blood Pressure (mmHg)<input type="number" name="bp" required></label>
-      <label>BMI<input type="number" step="any" name="bmi"></label>
-      <label>Pregnancies<input type="number" name="pregnancies"></label>
+      <label>Age<input type="number" inputmode="numeric" pattern="[0-9]*" name="age" required></label>
+      <label>Glucose (mg/dL)<input type="number" inputmode="decimal" step="any" name="glucose" required></label>
+      <label>Blood Pressure (mmHg)<input type="number" inputmode="decimal" step="any" name="bp" required></label>
+      <label>BMI<input type="number" inputmode="decimal" step="any" name="bmi"></label>
+      <label>Pregnancies<input type="number" inputmode="numeric" pattern="[0-9]*" name="pregnancies"></label>
     </div>
     <fieldset>
       <legend>Related symptoms</legend>
